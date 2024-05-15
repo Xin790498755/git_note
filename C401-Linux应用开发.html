@@ -1,0 +1,533 @@
+<!DOCTYPE html><html><head>
+      <title>C401-Linux应用开发</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="centerfont-face仿宋-font-colororangemarkdown入门教程font"><center><font face="仿宋" font="" color="orange">Markdown入门教程</font> </center></h1>
+<h1 id="centerfont-face-楷体-sice5鑫fontcenter"><center><font face="楷体" sice="5">鑫</font></center> </h1>
+<h2 id="一-linux应用开发文件io基础">一、Linux应用开发：文件IO基础 </h2>
+<h3 id="1-前言">1. 前言 </h3>
+<p>学Linux应用开发前，先提前了解Linux一个特性：Linux下一切皆文件，这句话是指，Linux世界中的所有东西都可以通过文件的方式访问、管理，简单一点理解他就是一种面向对象的设计思想，把一切外设当做文件，访问处理外设的方式和访问处理文件的思路基本相同，虽然一些是硬件外设，看起来和文件没什么关系，但实际上每一个硬件设备都会对应于Linux系统下的某一个文件，我们把这类文件称为设备文件，使用open函数打开任何文件成功情况下便会返回对应的文件描述符，然后就可以对文件描述符进行操作，所以在学习Linux程序设计之前，必须先了解一下Linux下文件的操作方式，为后面的学习做铺垫。</p>
+<h3 id="2-文件的操作">2. 文件的操作 </h3>
+<h4 id="21文件描述符概念">2.1文件描述符概念 </h4>
+<p>当调用open函数打开一个现有文件或创建一个新文件时，内核会向进程返回一个文件描述符，用于指向被打开的文件，所有执行IO操作的API调用都是通过文件描述符来索引到对应的文件，例如下面的代码，调用open后返回了一个fd1文件描述符，后面读取操作直接对文件描述符进行操作就可以。</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>     //...
+     int fd1，state;
+     char buff[1024];
+     
+     fd1=open("./1.txt",O_RDONLY);	//获取文件描述符
+
+     state=read(fd1, buff, sizeof(buff));  //通过描述符对文件进行操作
+     if(state == -1)
+         printf("Read Failed!");
+     else
+         printf("Read Success!");
+     //...
+</code></pre><blockquote>
+<p>一个进程可以打开多个文件，但在Linux系统中，一个进程可以打开的文件数是有限制，并不是可以无限制打开很多的文件，可以通过ulimit命令来查看进程可打开的最大文件数</p>
+</blockquote>
+<p><code>ulimit -u</code></p>
+<p>文件描述符是从0开始分配的，比如进程中第一个被打开的文件对应的文件描述符是0、第二个文件是1、第三个文件是2、第4个文件是3…；但在程序中调用open函数打开文件的时候，分配的文件描述符一般都是从3开始，因为0、1、2这三个文件描述符已经默认被系统占用了，分别分配给了系统标注输入-0、标注输出-1，以及标准错误-2。</p>
+<h4 id="22-文件的打开与关闭">2.2 文件的打开与关闭 </h4>
+<h5 id="221-open打开文件">2.2.1 open()打开文件 </h5>
+<p>Linux系统中要操作一个文件，需要先打开该文件，得到文件描述符，open函数用于打开文件</p>
+<blockquote>
+<p>除了打开已经存在的文件之外，还可以创建一个新的文件</p>
+</blockquote>
+<p>函数原型如下：</p>
+<p><code>int open(const char *pathname, int flags, mode_t mode);//mode在flags为某些参数时才用到</code></p>
+<p>参数对应表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">pathname</td>
+<td style="text-align:center">目标文件路径（绝对路径或相对路径）</td>
+</tr>
+<tr>
+<td style="text-align:center">flags</td>
+<td style="text-align:center">调用open函数时需要提供的标志，包括文件访问模式标志以及其它文件相关标志，具体模式参照下表</td>
+</tr>
+<tr>
+<td style="text-align:center">mode</td>
+<td style="text-align:center">此参数用于指定新建文件的访问权限,只有当flags参数中包含O_CREAT或O_TMPFILE标志时才有效</td>
+</tr>
+</tbody>
+</table>
+<p>flag常用参数功能表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">O_RDONLY</td>
+<td style="text-align:center">以只读方式打开文件</td>
+</tr>
+<tr>
+<td style="text-align:center">O_WRONLY</td>
+<td style="text-align:center">以只写方式打开文件</td>
+</tr>
+<tr>
+<td style="text-align:center">O_RDWR</td>
+<td style="text-align:center">以可读可写方式打开文件</td>
+</tr>
+<tr>
+<td style="text-align:center">O_CREAT</td>
+<td style="text-align:center">如果pathname参数指向的文件不存在则创建此文件</td>
+</tr>
+<tr>
+<td style="text-align:center">O_DIRECTORY</td>
+<td style="text-align:center">如果pathname参数指向的不是一个目录，则调用open失败</td>
+</tr>
+<tr>
+<td style="text-align:center">O_EXCL</td>
+<td style="text-align:center">此标志一般结合O_CREAT标志一起使用，用于专门创建文件。在flags参数同时使用到了O_CREAT和O_EXCL标志的情况下，如果pathname参数指向的文件已经存在，则open函数返回错误。</td>
+</tr>
+<tr>
+<td style="text-align:center">O_NOFOLLOW</td>
+<td style="text-align:center">如果pathname参数指向的是一个符号链接，将不对其进行解引用，直接返回错误。</td>
+</tr>
+<tr>
+<td style="text-align:center">O_TMPFILE</td>
+<td style="text-align:center">用于创建一个临时文件</td>
+</tr>
+</tbody>
+</table>
+<h6 id="tips1">Tips1： </h6>
+<blockquote>
+<p>使用open函数需要包含如下头文件</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+</code></pre><p>且以上参数使用需要注意如下点：</p>
+<p>O_RDONLY、O_WRONLY、O_RDWR三个参数必须要使用其中一个用来指定文件的初始权限<br>
+使用了O_CREAT、O_TMPFILE标志后，第三个参数mode才有效<br>
+O_EXCL主要用于测试一个文件是否存在，结合O_CREAT使用，如果不存在则创建此文件，如果存在则返回错误，这使得测试和创建两者成为一个原子操作</p>
+</blockquote>
+<h6 id="tips2">Tips2： </h6>
+<blockquote>
+<p>所谓原子操作是指不会被线程调度机制打断的操作，这种操作一旦开始，就一直运行到结束！</p>
+</blockquote>
+<h6 id="tips3">Tips3： </h6>
+<blockquote>
+<p>不同内核版本所支持的flags标志是存在差别的，譬如说新版本内核所支持的标志可能在老版本是不支&gt;持的，亦或者老版本支持的标志在新版本已经被取消、替代，具体标志内容可以通过man手册查询，man&gt;手册中对一些标志是从哪个版本开始支持的有简单地说明<br>
+<code>man 2 open 	#查询open系统调用指令的手册</code><br>
+man命令后面跟着两个参数，数字2表示系统调用，man命令除了可以查看系统调用的帮助信息外，还可&gt;以查看Linux命令（对应数字1）以及标准C库函数（对应数字3）所对应的帮助信息；最后一个参数open&gt;表示需要查看的系统调用函数名</p>
+</blockquote>
+<p>标志使用方法：</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>open("./src_file", O_RDONLY) //单独使用某一个标志 
+open("./src_file", O_RDONLY | O_NOFOLLOW) //多个标志组合
+</code></pre><h6 id="mode参数说明">mode参数说明： </h6>
+<p>mode参数用于指定新建文件的访问权限，只有当flags参数中包含O_CREAT或O_TMPFILE标志时才有效，当我们调用open函数去新建一个文件时，也需要指定该文件的权限，而mode参数便用于指定此文件的权限，mode参数的类型是mode_t，这是一个u32无符号整形数据，权限表示方法如下所示<br>
+<img src="./png/C401-Linux%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%911.png" alt="C401-Linux应用开发1.png"></p>
+<p>由低的位向高的位看去，每3个bit位分为一组，分别表示：<br>
+O — 这3个bit位用于表示 其他用户的权限<br>
+G — 这3个bit位用于表示 同组用户（group）的权限，即与文件所有者有相同组ID的所有用户<br>
+U — 这3个bit位用于表示 文件所属用户的权限，即文件或目录的所属者<br>
+S — 这3个bit位用于表示 文件的特殊权限，文件特殊权限一般用的比较少，这里就不细讲</p>
+<blockquote>
+<p>3个bit位中，按照rwx顺序来分配权限位，为1时表示具有读权限，为0时没有读权限</p>
+</blockquote>
+<p>对应的权限在Linux中有定义好的宏来调用，用户使用时就不需要自己研究位数的分配，宏定义如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">权限</th>
+<th style="text-align:center">所有者</th>
+<th style="text-align:center">同组用户</th>
+<th style="text-align:center">其他用户</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">读</td>
+<td style="text-align:center">S_IRUSR</td>
+<td style="text-align:center">S_IRGRP</td>
+<td style="text-align:center">S_IROTH</td>
+</tr>
+<tr>
+<td style="text-align:center">写</td>
+<td style="text-align:center">S_IWUSR</td>
+<td style="text-align:center">S_IWGRP</td>
+<td style="text-align:center">S_IWOTH</td>
+</tr>
+<tr>
+<td style="text-align:center">执行</td>
+<td style="text-align:center">S_IWUSR</td>
+<td style="text-align:center">S_IXGRP</td>
+<td style="text-align:center">S_IXOTH</td>
+</tr>
+<tr>
+<td style="text-align:center">读、写、执行一体</td>
+<td style="text-align:center">S_IRWXU</td>
+<td style="text-align:center">S_IRWXG</td>
+<td style="text-align:center">S_IRWXO</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">权限</th>
+<th style="text-align:center">set-user-ID（特殊权限）</th>
+<th style="text-align:center">set-group-ID（特殊权限）</th>
+<th style="text-align:center">sticky（特殊权限）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">特殊权限</td>
+<td style="text-align:center">S_ISUID</td>
+<td style="text-align:center">S_ISGID</td>
+<td style="text-align:center">S_ISVTX</td>
+</tr>
+</tbody>
+</table>
+<p>这些宏既可以单独使用，也可以通过位或运算将多个宏组合在一起</p>
+<p><code>S_IRUSR | S_IWUSR | S_IROTH</code></p>
+<p>**函数返回值： ** 成功将返回文件描述符，文件描述符是一个非负整数；失败将返回-1。</p>
+<h5 id="222-close关闭文件">2.2.2 close关闭文件 </h5>
+<p>可调用close函数关闭一个已经打开的文件，其函数原型如下所示</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#include &lt;unistd.h&gt;
+
+int close(int fd);
+</code></pre><blockquote>
+<p>使用close函数需要先包含unistd.h头文件</p>
+</blockquote>
+<p>参数： 传入参数fd为文件描述符，需要关闭的文件所对应的文件描述符<br>
+返回值： 如果成功返回0，如果失败则返回-1</p>
+<blockquote>
+<p>除了使用close函数显式关闭文件之外，在Linux系统中，当一个进程终止时，内核会自动关闭它打开的所有文件，显式关闭不再需要的文件是良好的编程习惯，会使代码更具有可读性，也更可靠，进而言之<br>
+同时注意文件描述符是有限资源，当不再需要时最好将其释放、归还于系统！</p>
+</blockquote>
+<h4 id="23-文件的读取与写入">2.3 文件的读取与写入 </h4>
+<h5 id="231-write写文件">2.3.1 write()写文件 </h5>
+<p>调用write函数向打开的文件写入数据，函数原型如下</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#include &lt;unistd.h&gt; 
+
+ssize_t write(int fd, const void *buf, size_t count);
+</code></pre><p>使用write函数需要先包含unistd.h头文件。</p>
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fd</td>
+<td style="text-align:center">文件描述符</td>
+</tr>
+<tr>
+<td style="text-align:center">buf</td>
+<td style="text-align:center">要写入的数据对应的缓冲区，传入指针</td>
+</tr>
+<tr>
+<td style="text-align:center">count</td>
+<td style="text-align:center">指定写入的字节数</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>读写操作都是从文件的当前位置偏移量处开始，当然当前位置偏移量可以通过lseek系统调用进行设置，关于此函数后面再讲</p>
+</blockquote>
+<p>返回值： 如果写入成功，则返回成功写入的字节数，如果失败则返回-1</p>
+<h5 id="232-read读文件">2.3.2 read()读文件 </h5>
+<p>调用read函数可从打开的文件中读取数据，其函数原型如下所示</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#include &lt;unistd.h&gt; 
+
+ssize_t read(int fd, void *buf, size_t count);
+</code></pre><blockquote>
+<p>使用read函数需要先包含unistd.h头文件</p>
+</blockquote>
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fd</td>
+<td style="text-align:center">文件描述符</td>
+</tr>
+<tr>
+<td style="text-align:center">buf</td>
+<td style="text-align:center">用来存放读取数据的缓冲区，传入指针</td>
+</tr>
+<tr>
+<td style="text-align:center">count</td>
+<td style="text-align:center">指定读取的字节数</td>
+</tr>
+</tbody>
+</table>
+<p>返回值： 如果读取成功将返回读取到的字节数，如果失败则返回-1</p>
+<p>2.4 文件读写位置偏移<br>
+每个打开的文件，系统都会记录它的读写位置偏移量，我们也把这个读写位置偏移量称为读写偏移量，记录了文件当前的读写位置，当调用read()或write()函数对文件进行读写操作时，就会从当前读写位置偏移量开始进行数据读写，打开文件时，会将读写偏移量设置为指向文件开始位置处，以后每次调用read()、write()将自动对其进行调整，以指向已读或已写数据后的下一字节，而调用seek函数，可以手动修改偏移量，改变读写位置，函数原型如下：</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#include &lt;sys/types.h&gt; 
+#include &lt;unistd.h&gt; 
+
+off_t lseek(int fd, off_t offset, int whence);
+</code></pre><p>调用lseek函数需要包含&lt;sys/types.h&gt;和&lt;unistd.h&gt;两个头文件</p>
+<p>函数参数：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fd</td>
+<td style="text-align:center">文件描述符</td>
+</tr>
+<tr>
+<td style="text-align:center">offset</td>
+<td style="text-align:center">偏移量，以字节为单位</td>
+</tr>
+<tr>
+<td style="text-align:center">whence</td>
+<td style="text-align:center">用于定义参数offset偏移量对应的参考值，该参数为下列宏定义中的一种</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏定义</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">SEEK_SET</td>
+<td style="text-align:center">偏移量从文件头部开始算</td>
+</tr>
+<tr>
+<td style="text-align:center">SEEK_CUR</td>
+<td style="text-align:center">偏移量从当前位置开始算</td>
+</tr>
+<tr>
+<td style="text-align:center">SEEK_END</td>
+<td style="text-align:center">偏移量将从文件末尾开始算</td>
+</tr>
+</tbody>
+</table>
+<p>返回值： 成功将返回从文件头部开始算起的位置偏移量（字节为单位），也就是当前的读写位置；发生错误将返回-1。</p>
+<h3 id="3实例编程">3.实例编程 </h3>
+<p>打开一个已经存在的文件（例如src_file），使用只读方式；然后打开一个新建文件（例如dest_file），使用只写方式，新建文件的权限设置如下：</p>
+<ol>
+<li>文件所属者拥有读、写、执行权限；</li>
+<li>同组用户与其他用户只有读权限。</li>
+<li>从src_file文件偏移头部500个字节位置开始读取1Kbyte字节数据，然后将读取出来的数据写入到dest_file文件中，从文件开头处开始写入，1Kbyte字节大小，操作完成之后使用close显式关闭所有文件，然后退出程序。</li>
+</ol>
+<p>参考代码</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code> #include &lt;sys/types.h&gt;
+ #include &lt;sys/stat.h&gt;
+ #include &lt;fcntl.h&gt;
+ #include &lt;unistd.h&gt;
+ int main(void)
+ {
+     char buff[1024]={0};
+     int fd1, fd2;
+     int ret;
+     /* 打开源文件 src_file(只读方式) */
+     fd1 = open("./1.txt", O_RDONLY);
+     if (-1 == fd1)
+         return fd1;
+     /* 打开目标文件 dest_file(只写方式) */
+     fd2 = open("./2.txt", O_WRONLY);
+     if (-1 == fd2) {
+         ret = fd2;
+         goto out1;
+     }
+     /* 读取源文件 1KB 数据到 buff 中 */
+     ret = read(fd1, buff, sizeof(buff));
+     if (-1 == ret)
+         goto out2;
+     /* 将 buff 中的数据写入目标文件 */
+     ret = write(fd2, buff, sizeof(buff));
+     if (-1 == ret)
+         goto out2;
+     ret = 0;
+     out2:
+     /* 关闭目标文件 */
+     close(fd2);
+     out1:
+     /* 关闭源文件 */
+     close(fd1);
+     return ret;
+ }
+</code></pre><p>gcc编译<br>
+<img src="./png/C401-Linux%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%912.png" alt="C401-Linux应用开发2.png"></p>
+<p>运行结果：<br>
+<img src="./png/C401-Linux%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%913.png" alt="C401-Linux应用开发3.png"></p>
+<h2 id="二-linux应用开发文件io进阶">二、Linux应用开发：文件IO进阶 </h2>
+
+      </div>
+      <div class="md-sidebar-toc">
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#centerfont-face仿宋-font-colororangemarkdown入门教程font" class="md-toc-link">
+            </a><center><a href="#centerfont-face仿宋-font-colororangemarkdown入门教程font" class="md-toc-link"><font face="仿宋" font="" color="orange">Markdown入门教程</font>
+          </a></center></div><details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#centerfont-face-楷体-sice5鑫fontcenter" class="md-toc-link"><center><font face="楷体" sice="5">鑫</font></center></a>
+          </summary>
+        <div>
+          <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#一-linux应用开发文件io基础" class="md-toc-link"><p>一、Linux应用开发：文件IO基础</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#1-前言" class="md-toc-link">
+            <ol>
+<li>前言</li>
+</ol>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#2-文件的操作" class="md-toc-link"><ol start="2">
+<li>文件的操作</li>
+</ol>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#21文件描述符概念" class="md-toc-link">
+            <p>2.1文件描述符概念</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#22-文件的打开与关闭" class="md-toc-link"><p>2.2 文件的打开与关闭</p>
+</a>
+          </summary>
+        <div>
+          <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#221-open打开文件" class="md-toc-link"><p>2.2.1 open()打开文件</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#tips1" class="md-toc-link">
+            <p>Tips1：</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#tips2" class="md-toc-link">
+            <p>Tips2：</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#tips3" class="md-toc-link">
+            <p>Tips3：</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#mode参数说明" class="md-toc-link">
+            <p>mode参数说明：</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#222-close关闭文件" class="md-toc-link">
+            <p>2.2.2 close关闭文件</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#23-文件的读取与写入" class="md-toc-link"><p>2.3 文件的读取与写入</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#231-write写文件" class="md-toc-link">
+            <p>2.3.1 write()写文件</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#232-read读文件" class="md-toc-link">
+            <p>2.3.2 read()读文件</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#3实例编程" class="md-toc-link">
+            <p>3.实例编程</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#二-linux应用开发文件io进阶" class="md-toc-link">
+            <p>二、Linux应用开发：文件IO进阶</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+</div>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    
+    
+    
+    
+    
+    
+<script>
+document.body.setAttribute('html-show-sidebar-toc', true)
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>

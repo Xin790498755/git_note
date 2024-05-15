@@ -1,0 +1,420 @@
+<!DOCTYPE html><html><head>
+      <title>C102-makefile入门</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///e:\VScode\chajian\shd101wyy.markdown-preview-enhanced-0.8.13\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="centerfont-face仿宋-font-colororangemarkdown入门教程font"><center><font face="仿宋" font="" color="orange">Markdown入门教程</font> </center></h1>
+<h1 id="centerfont-face-楷体-sice5鑫fontcenter"><center><font face="楷体" sice="5">鑫</font></center> </h1>
+<h2 id="1makefile编译过程">1.Makefile编译过程 </h2>
+<p><img src="./png/C102-makefile%E5%85%A5%E9%97%A81.png" alt="C102-makefile入门1.png"><br>
+Makefile文件中的命令有一定规范，一旦该文件编写好以后在Linux命令行中执行一条make命令即可自动编译整个工程。不同厂家的make可能会稍有不同，并且语法上也有区别，不过基本思想都差不多，主要还是落在目标依赖上，最广泛使用的是GNUmake。</p>
+<h2 id="2语法规则">2.语法规则 </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>目标 ... : 依赖 ...
+	命令1
+	命令2
+	. . .
+</code></pre><p>Makefile的核心规则，类似于一位厨师做菜，目标就是做好一道菜，那么所谓的依赖就是各种食材，各种厨具等等，然后需要厨师好的技术方法类似于命令，才能作出一道好菜。<br>
+  同时这些依赖也有可能此时并不存在，需要现场制作，或者是由其他厨师做好，那么这个依赖就成为了其他规则的目标，该目标也会有他自己的依赖和命令。这样就形成了一层一层递归依赖组成了Makefile文件。<br>
+  Makefile并不会关心命令是如何执行的，仅仅只是会去执行所有定义的命令，和我们平时直接输入命令行是一样的效果。<br>
+1、目标即要生成的文件。如果目标文件的更新时间晚于依赖文件更新时间，则说明依赖文件没有改动，目标文件不需要重新编译。否则会进行重新编译并更新目标文件。<br>
+2、默认情况下Makefile的第一个目标为终极目标。<br>
+3、依赖：即目标文件由哪些文件生成。<br>
+4、命令：即通过执行命令由依赖文件生成目标文件。注意每条命令之前必须有一个tab(此文档编辑器默认是空格，复制下来的代码需要把命令代码的缩进改为tab制表符)保持缩进，这是语法要求（会有一些编辑工具默认tab为4个空格，会造成Makefile语法错误）。<br>
+5、all：Makefile文件默认只生成第一个目标文件即完成编译，但是我们可以通过all 指定所需要生成的目标文件。例如下面的例子。</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>all: target1 target2 target3
+target1:
+# 编译规则1
+target2:
+# 编译规则2
+target3:
+# 编译规则3
+</code></pre><blockquote>
+<p>all被设置为第一个目标，并且target1、target2和target3被列为all的依赖。当你在命令行中运行make时，make命令会寻找并执行all目标规则，这将依次执行target1、target2和target3的编译规则。<br>
+因此，通过在Makefile中设置all作为默认目标规则，你可以简化构建过程，只需运行make命令即可执行整个编译过程，无需显式指定目标</p>
+</blockquote>
+<h2 id="3变量">3.变量 </h2>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>符号表示取变量的值，当变量名多于一个字符时，使用</mtext><mi mathvariant="normal">"</mi><mo stretchy="false">(</mo><mo stretchy="false">)</mo><mi mathvariant="normal">"</mi></mrow><annotation encoding="application/x-tex">符号表示取变量的值，当变量名多于一个字符时，使用"( )"</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord cjk_fallback">符号表示取变量的值，当变量名多于一个字符时，使用</span><span class="mord">"</span><span class="mopen">(</span><span class="mclose">)</span><span class="mord">"</span></span></span></span>符的其他用法</p>
+<blockquote>
+<p><code>$^</code> 表示所有的依赖文件<br>
+<code>$@</code> 表示生成的目标文件<br>
+<code>$&lt;</code> 代表第一个依赖文件</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>SRC = $(wildcard *.c)
+OBJ = $(patsubst %.c, %.o, $(SRC))
+ 
+ALL: hello.out
+ 
+hello.out: $(OBJ)
+        gcc $&lt; -o $@
+ 
+%.o: %.c
+        gcc -c $&lt; -o $@
+
+</code></pre><h2 id="4变量赋值">4.变量赋值 </h2>
+<p>1、"="是最普通的等号，在Makefile中容易搞错赋值等号，使用 “=”进行赋值，变量的值是整个Makefile中最后被指定的值。</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>VIR_A = A
+VIR_B = $(VIR_A) B
+VIR_A = AA
+</code></pre><p>经过上面的赋值后，最后VIR_B的值是AA B，而不是A B，在make时，会把整个Makefile展开，来决定变量的值<br>
+  2、“:=” 表示直接赋值，赋予当前位置的值。</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>VIR_A := A
+VIR_B := $(VIR_A) B
+VIR_A := AA
+</code></pre><p>最后BIR_B的值是A B，即根据当前位置进行赋值。因此相当于“=”，“：=”才是真正意义上的直接赋值<br>
+  3、“?=” 表示如果该变量没有被赋值，赋值予等号后面的值。</p>
+<p><code>VIR ?= new_value</code></p>
+<p>如果VIR在之前没有被赋值，那么VIR的值就为new_value。</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>VIR := old_value
+VIR ?= new_value
+</code></pre><p>这种情况下，VIR的值就是old_value<br>
+  4、"+="和平时写代码的理解是一样的，表示将符号后面的值添加到前面的变量上</p>
+<h2 id="5预定义变量">5.预定义变量 </h2>
+<p>CC：c编译器的名称，默认值为cc。cpp c预编译器的名称默认值为$(CC) -E</p>
+<p><code>CC = gcc</code></p>
+<p>回显问题，Makefile中的命令都会被打印出来。如果不想打印命令部分 可以使用@去除回显</p>
+<p><code>@echo "clean done!"</code></p>
+<h2 id="6函数">6.函数 </h2>
+<p>通配符</p>
+<p><code>SRC = $(wildcard ./*.c)</code></p>
+<p>匹配目录下所有.c 文件，并将其赋值给SRC变量。</p>
+<p><code>OBJ = $(patsubst %.c, %.o, $(SRC))</code></p>
+<p>这个函数有三个参数，意思是取出SRC中的所有值，然后将.c 替换为.o 最后赋值给OBJ变量。<br>
+示例：如果目录下有很多个.c 源文件，就不需要写很多条规则语句了，而是可以像下面这样写</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>SRC = $(wildcard *.c)
+OBJ = $(patsubst %.c, %.o, $(SRC))
+ 
+ALL: hello.out
+ 
+hello.out: $(OBJ)
+        gcc $(OBJ) -o hello.out
+ 
+%.o: %.c
+        gcc -c $&lt; -o $@
+</code></pre><p>这里先将所有.c 文件编译为 .o 文件，这样后面更改某个 .c 文件时，其他的 .c 文件将不在编译，而只是编译有更改的 .c 文件，可以大大提高大项目中的编译速度。</p>
+<h2 id="7伪目标-phony">7.伪目标 .PHONY </h2>
+<p>伪目标只是一个标签，clean是个伪目标没有依赖文件，只有用make来调用时才会执行<br>
+当目录下有与make 命令 同名的文件时 执行make 命令就会出现错误。<br>
+解决办法就是使用伪目标</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>SRC = $(wildcard *.c)
+OBJ = $(patsubst %.c, %.o, $(SRC))
+ 
+ALL: hello.out
+ 
+hello.out: $(OBJ)
+        gcc $&lt; -o $@
+ 
+$(OBJ): $(SRC)
+        gcc -c $&lt; -o $@
+ 
+clean:
+        rm -rf $(OBJ) hello.out
+ 
+.PHONY: clean ALL
+</code></pre><p>通常也会把ALL设置成伪目标</p>
+<h2 id="8其他常用功能">8.其他常用功能 </h2>
+<p>代码清理clean<br>
+我们可以编译一条属于自己的clean语句，来清理make命令所产生的所有文件，列如</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>SRC = $(wildcard *.c)
+OBJ = $(patsubst %.c, %.o, $(SRC))
+ 
+ALL: hello.out
+ 
+hello.out: $(OBJ)
+        gcc $&lt; -o $@
+ 
+$(OBJ): $(SRC)
+        gcc -c $&lt; -o $@
+ 
+clean:
+        rm -rf $(OBJ) hello.out
+</code></pre><h2 id="9嵌套执行makefile">9.嵌套执行Makefile </h2>
+<p>在一些大工程中，会把不同模块或不同功能的源文件放在不同的目录中，我们可以在每个目录中都写一个该目录的Makefile这有利于让我们的Makefile变的更加简洁，不至于把所有东西全部写在一个Makefile中。<br>
+  列如在子目录subdir目录下有个Makefile文件，来指明这个目录下文件的编译规则。外部总Makefile可以这样写</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>subsystem:
+            cd subdir &amp;&amp; $(MAKE)
+其等价于：
+subsystem:
+            $(MAKE) -C subdir
+
+</code></pre><p>定义$(MAKE)宏变量的意思是，也许我们的make需要一些参数，所以定义成一个变量比较有利于维护。两个例子意思都是先进入"subdir"目录，然后执行make命令<br>
+  我们把这个Makefile叫做总控Makefile，总控Makefile的变量可以传递到下级的Makefile中，但是不会覆盖下层Makefile中所定义的变量，除非指定了 "-e"参数。<br>
+  如果传递变量到下级Makefile中，那么可以使用这样的声明<br>
+  export<br>
+  如果不想让某些变量传递到下级Makefile，可以使用<br>
+  unexport</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>export variable = value
+等价于
+variable = value
+export variable
+等价于
+export variable := value
+等价于
+variable := value
+export variable
+
+</code></pre><h2 id="10制定头文件路径">10.制定头文件路径 </h2>
+<p>一般都是通过"-I"（大写i）来指定，假设头文件在：</p>
+<p><code>/home/develop/include</code></p>
+<p>则可以通过-I指定：</p>
+<p><code>-I/home/develop/include</code></p>
+<p>将该目录添加到头文件搜索路径中<br>
+在Makefile中则可以这样写：</p>
+<p><code>CFLAGS=-I/home/develop/include</code></p>
+<p>然后在编译的时候，引用CFLAGS即可，如下</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>yourapp:*.c
+    gcc $(CFLAGS) -o yourapp
+
+</code></pre><h2 id="11指定库文件路径">11.指定库文件路径 </h2>
+<p>与上面指定头文件类似只不过使用的是"-L"来指定</p>
+<p><code>LDFLAGS=-L/usr/lib -L/path/to/your/lib</code></p>
+<p>告诉链接器要链接哪些库文件，使用"-l"（小写L）如下：</p>
+<p><code>LIBS = -lpthread -liconv</code></p>
+<h2 id="12简单的makefile实例">12.简单的Makefile实例 </h2>
+<p><strong>目录结构</strong></p>
+<blockquote>
+<p>makefileTest</p>
+<blockquote>
+<p>f1</p>
+<blockquote>
+<p>f1.c<br>
+Makefile</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>f2</p>
+<blockquote>
+<p>f2.c<br>
+Makefile</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>include</p>
+<blockquote>
+<p>myinclude.h</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>main</p>
+<blockquote>
+<p>mian.c<br>
+Makefile</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>obj</p>
+<blockquote>
+<p>Makefile</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>Makefile</p>
+</blockquote>
+<p><strong>include</strong><br>
+myinclude.h</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#include &lt;stdio.h&gt;
+void print1() ;
+void print2() ;
+
+</code></pre><p><strong>fi</strong><br>
+f1.c</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#include "../include/myinclude.h"                                                                              
+
+void print1()  
+{  
+	printf("Message f1.c\n");  
+	return;  
+} 
+
+</code></pre><p>Makefile<br>
+目标前面的路径，意思是将目标生成到指定的目录下</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>../$(OBJS_DIR)/f1.o:f1.c                                                                                       
+	@$(CC) -c $^ -o $@  
+
+</code></pre><p><strong>f2</strong><br>
+f2.c</p>
+<p>#include "../include/myinclude.h"</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>void print2()  
+{  
+	printf("Message f2.c\n");  
+	return;  
+} 
+
+</code></pre><p>Makefile</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>../$(OBJS_DIR)/f2.o:f2.c                                                                                       
+	@$(CC) -c $^ -o $@ 
+</code></pre><p><strong>main</strong><br>
+main.c</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#include "../include/myinclude.h"                                                                                            
+ 
+int main(int argc, char const *argv[])
+{
+    print1();  
+	print2();  
+    return 0;
+}
+
+</code></pre><p>Makefile</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>../$(OBJS_DIR)/main.o:main.c                                                                                   
+	@$(CC) -c $^ -o $@  
+
+</code></pre><p><strong>obj</strong><br>
+此目录用来存放相关生成的目标文件<br>
+Makefile</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>../$(BIN_DIR)/$(BIN) : $(OBJS)
+	@$(CC) $^ -o $@ 
+</code></pre><p><strong>主Makefile</strong></p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>#预定义变量
+CC = gcc
+#预定义编译目录
+SUBDIRS = f1 \
+        f2 \
+        main \
+        obj
+#预定义目标
+OBJS = f1.o f2.o main.o
+BIN = myapp
+OBJS_DIR = obj
+BIN_DIR = bin
+#传递预定义参数
+export CC OBJS BIN OBJS_DIR BIN_DIR
+
+all:CHECK_DIR $(SUBDIRS)
+CHECK_DIR:
+	@mkdir -p $(BIN_DIR)
+$(SUBDIRS):ECHO
+	@make -C $@ 
+
+ECHO:
+	@echo $(SUBDIRS)
+	@echo begin compile
+clean:
+	@$(RM) $(OBJS_DIR)/*.o
+	@rm -rf $(BIN_DIR)
+
+</code></pre><p><strong>bin</strong><br>
+此文件用来存放生成的二进制文件</p>
+<p><strong>执行结果</strong><br>
+主Makefile执行过程<br>
+<img src="./png/C102-makefile%E5%85%A5%E9%97%A82.png" alt="C102-makefile入门2.png"><br>
+生成.o文件<br>
+<img src="./png/C102-makefile%E5%85%A5%E9%97%A83.png" alt="C102-makefile入门3.png"><br>
+生成二进制文件执行结果<br>
+<img src="./png/C102-makefile%E5%85%A5%E9%97%A84.png" alt="C102-makefile入门4.png"></p>
+
+      </div>
+      <div class="md-sidebar-toc">
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#centerfont-face仿宋-font-colororangemarkdown入门教程font" class="md-toc-link">
+            </a><center><a href="#centerfont-face仿宋-font-colororangemarkdown入门教程font" class="md-toc-link"><font face="仿宋" font="" color="orange">Markdown入门教程</font>
+          </a></center></div><details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#centerfont-face-楷体-sice5鑫fontcenter" class="md-toc-link"><center><font face="楷体" sice="5">鑫</font></center></a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#1makefile编译过程" class="md-toc-link">
+            <p>1.Makefile编译过程</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#2语法规则" class="md-toc-link">
+            <p>2.语法规则</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#3变量" class="md-toc-link">
+            <p>3.变量</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#4变量赋值" class="md-toc-link">
+            <p>4.变量赋值</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#5预定义变量" class="md-toc-link">
+            <p>5.预定义变量</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#6函数" class="md-toc-link">
+            <p>6.函数</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#7伪目标-phony" class="md-toc-link">
+            <p>7.伪目标 .PHONY</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#8其他常用功能" class="md-toc-link">
+            <p>8.其他常用功能</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#9嵌套执行makefile" class="md-toc-link">
+            <p>9.嵌套执行Makefile</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#10制定头文件路径" class="md-toc-link">
+            <p>10.制定头文件路径</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#11指定库文件路径" class="md-toc-link">
+            <p>11.指定库文件路径</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#12简单的makefile实例" class="md-toc-link">
+            <p>12.简单的Makefile实例</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+</div>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    
+    
+    
+    
+    
+    
+<script>
+document.body.setAttribute('html-show-sidebar-toc', true)
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>
